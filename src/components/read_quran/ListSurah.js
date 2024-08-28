@@ -1,25 +1,27 @@
 function ListSurah({ listSurah }) {
+    console.log("Data listSurah di ListSurah:", listSurah); // Tambahkan log
     return (
-      <div className="h-full w-full p-4 overflow-y-auto">
-        {listSurah && Array.isArray(listSurah) && listSurah.length > 0 ? (
-          listSurah.map((surah) => (
-            <ItemSurah
-              key={surah.nomor} // Key yang unik berdasarkan nomor surah
-              nomor={surah.nomor}
-              namaSurah={surah.nama_latin}
-              artiSurah={surah.arti}
-              tempatTurunSurah={surah.tempat_turun}
-              jumlahAyat={surah.jumlah_ayat}
-            />
-          ))
-        ) : (
-          <p>No Surah available</p> // Pesan fallback jika tidak ada surah yang tersedia
-        )}
-      </div>
+        <div className="h-full w-full p-4 overflow-y-auto">
+            {listSurah && Array.isArray(listSurah) && listSurah.length > 0 ? (
+                listSurah.map((surah) => (
+                    <ItemSurah
+                        key={surah.nomor}
+                        nomor={surah.nomor}
+                        namaSurah={surah.nama_latin}
+                        artiSurah={surah.arti}
+                        tempatTurunSurah={surah.tempat_turun}
+                        jumlahAyat={surah.jumlah_ayat}
+                    />
+                ))
+            ) : (
+                <p>No Surah available</p>
+            )}
+        </div>
     );
-  }
-  
-  export default ListSurah;
+}
+
+export default ListSurah;
+
   
   function ItemSurah({ nomor, namaSurah, artiSurah, tempatTurunSurah, jumlahAyat }) {
     return (
