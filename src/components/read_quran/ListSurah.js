@@ -1,11 +1,11 @@
 function ListSurah({ listSurah }) {
-    console.log("Data listSurah di ListSurah:", listSurah); // Tambahkan log
+    console.log("Data listSurah di ListSurah:", listSurah);
     return (
         <div className="h-full w-full p-4 overflow-y-auto">
             {listSurah && Array.isArray(listSurah) && listSurah.length > 0 ? (
-                listSurah.map((surah) => (
+                listSurah.map((surah, index) => (
                     <ItemSurah
-                        key={surah.nomor}
+                        key={index}
                         nomor={surah.nomor}
                         namaSurah={surah.nama_latin}
                         artiSurah={surah.arti}

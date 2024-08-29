@@ -4,25 +4,27 @@ import RightSection from "../../components/read_quran/RightSection";
 import { QuranApi } from "../../services/quran_api";
 
 function ReadQuran() {
-    const [listSurah, setListSurah] = useState([])
+    const [listSurah, setListSurah] = useState([]);
+
     useEffect(() => {
         getSurah();
-    },[]);
+    }, []);
 
-    async function getSurah()
-    {
+    async function getSurah() {
         const surah = await QuranApi.getSurah();
-        setListSurah(surah)
-        
+        console.log("Data surah yang diterima:", surah); // Tambahkan log
+        setListSurah(surah);
     }
 
-    return <div className="bg-slate-500 flex w-full h-screen">
-        {/* Bagian kiri */}
-        <LeftSection listSurah={listSurah}/>
-    
-        {/* BAGIAN KANAN */}
-        <RightSection />
-    </div>;
+    return (
+        <div className="bg-slate-500 flex w-full h-screen">
+            {/* Bagian kiri */}
+            <LeftSection listSurah={listSurah} />
+
+            {/* BAGIAN KANAN */}
+            <RightSection />
+        </div>
+    );
 }
 
 export default ReadQuran;
