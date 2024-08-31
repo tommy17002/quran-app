@@ -17,5 +17,21 @@ export const QuranApi = {
             console.error("Failed to fetch surah:", err);
             return []; // Kembalikan array kosong jika terjadi kesalahan
         }
+    },
+
+    getDetailSurah: async function(nomor) 
+    {
+        try 
+        {
+            // Gunakan backticks untuk template literal
+            const response = await fetch(`https://equran.id/api/surat/${nomor}`);
+            const data = await response.json();
+            return data;
+        } 
+        catch (err) 
+        {
+            console.error("Failed to fetch detail surah:", err);
+            return {}; // Kembalikan objek kosong jika terjadi kesalahan
+        }    
     }
 }

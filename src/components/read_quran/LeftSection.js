@@ -1,31 +1,26 @@
 import { useState } from "react";
 import ListSurah from "./ListSurah";
 
-function LeftSection({ listSurah }) {
-    const [search, setSearch]=useState('');
-    const [listSurahBaru, setListSurahBaru] = useState([])
+function LeftSection({ listSurah, getDetailSurah }) {
+    console.log(typeof getDetailSurah); // Harusnya "function"
 
-    function onchangeHandler(e)
-    {
-        // e.preventDefault();
+    const [search, setSearch] = useState('');
+    const [listSurahBaru, setListSurahBaru] = useState([]);
+
+    function onchangeHandler(e) {
         setSearch(e.target.value);
 
-        if(search.length > 1) 
-        {
-            const listSurahTemp = listSurah.filter((surah) => surah.nama_latin.toLowerCase().includes(search.toLowerCase()))
-            setListSurahBaru(listSurahTemp)
+        if (search.length > 1) {
+            const listSurahTemp = listSurah.filter((surah) => surah.nama_latin.toLowerCase().includes(search.toLowerCase()));
+            setListSurahBaru(listSurahTemp);
         }
         console.log(listSurahBaru);
-        
     }
 
     return (
         <div className="bg-white basis-1/4 flex flex-col">
-            {/* text field surah */}
-            <InputSearch value={search} onChange={onchangeHandler}/>
-
-            {/* List nama surah */}
-            <ListSurah listSurah={search.length > 1 ? listSurahBaru : listSurah} />
+            <InputSearch value={search} onChange={onchangeHandler} />
+            <ListSurah listSurah={search.length > 1 ? listSurahBaru : listSurah} getDetailSurah={getDetailSurah} />
         </div>
     );
 }
