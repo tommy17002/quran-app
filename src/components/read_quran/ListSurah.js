@@ -1,5 +1,5 @@
 function ListSurah({ listSurah, getDetailSurah }) {
-  console.log(typeof getDetailSurah); // Harusnya "function"
+  console.log(typeof getDetailSurah); 
 
   return (
       <div className="h-full w-full p-4 overflow-y-auto">

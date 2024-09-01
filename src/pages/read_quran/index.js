@@ -6,6 +6,7 @@ import { QuranApi } from "../../services/quran_api";
 function ReadQuran() {
     const [listSurah, setListSurah] = useState([]);
     const [detailSurah, setDetailSurah] = useState({});
+    const [randomAyat, setRandomAyat] = useState(null); // State untuk menyimpan ayat acak
 
     useEffect(() => {
         getSurah();
@@ -13,24 +14,32 @@ function ReadQuran() {
 
     async function getSurah() {
         const surah = await QuranApi.getSurah();
-        console.log("Data surah yang diterima:", surah); // Tambahkan log
         setListSurah(surah);
     }
 
     async function getDetailSurah(nomor) {
-        console.log(typeof getDetailSurah); // Harusnya "function"
         const detailSurah = await QuranApi.getDetailSurah(nomor);
         setDetailSurah(detailSurah);
-        console.log(detailSurah);
-    }       
+    }
+
+    async function getRandomAyat() {
+        console.log("Randomize Ayat button clicked"); // Tambahkan log ini
+        const randomSurahIndex = Math.floor(Math.random() * listSurah.length);
+        const randomSurah = listSurah[randomSurahIndex];
+        const detailSurah = await QuranApi.getDetailSurah(randomSurah.nomor);
+    
+        if (detailSurah && detailSurah.ayat) {
+            const randomAyatIndex = Math.floor(Math.random() * detailSurah.ayat.length);
+            const ayat = detailSurah.ayat[randomAyatIndex];
+            setRandomAyat({ ...ayat, namaSurah: detailSurah.nama_latin });
+        }
+    }
+    
 
     return (
         <div className="bg-slate-500 flex w-full h-screen">
-            {/* Bagian kiri */}
-            <LeftSection listSurah={listSurah} getDetailSurah={getDetailSurah} />
-
-            {/* BAGIAN KANAN */}
-            <RightSection />
+<LeftSection listSurah={listSurah} getDetailSurah={getDetailSurah} getRandomAyat={getRandomAyat} />
+<RightSection detailSurah={detailSurah} randomAyat={randomAyat} />
         </div>
     );
 }
